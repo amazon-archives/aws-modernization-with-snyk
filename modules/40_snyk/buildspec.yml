@@ -1,0 +1,43 @@
+version: 0.2
+
+env:
+  parameter-store:
+    SNYK_AUTH_TOKEN: "snykAuthToken"
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=$(aws ecr describe-repositories --repository-name petstore_frontend --query=repositories[0].repositoryUri --output=text)
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - PWD=$(pwd)
+      - PWDUTILS=$(pwd)
+      - curl -Lo ./snyk "https://github.com/snyk/snyk/releases/download/v1.210.0/snyk-linux"
+      - chmod -R +x ./snyk
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - cd modules/containerize-application
+      - docker build --build-arg snyk_auth_token=$SNYK_AUTH_TOKEN -t $REPOSITORY_URI:latest .
+      - $PWDUTILS/snyk auth $SNYK_AUTH_TOKEN
+      - $PWDUTILS/snyk test --docker $REPOSITORY_URI:latest
+      - $PWDUTILS/snyk monitor --docker $REPOSITORY_URI:latest
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - echo Source DIR ${CODEBUILD_SRC_DIR}
+      - printf '[{"name":"petstore","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > ${CODEBUILD_SRC_DIR}/imagedefinitions.json
+artifacts:
+  files:
+  - 'imagedefinitions.json'
