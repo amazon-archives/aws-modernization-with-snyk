@@ -29,5 +29,8 @@ msbuild.wrn
 .vs/
 .vscode/
 
+# JetBrains IDEs
+.idea
+
 # Node Modules
 node_modules/

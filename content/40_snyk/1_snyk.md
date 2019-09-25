@@ -48,20 +48,20 @@ Obtain an account and setting up the credentials for this exercise:
 
 - You will sign up to https://app.snyk.io/signup using `Google`, `Bitbucket` or `Github` credentials. **Snyk** utilizes these services for authentication and does not store passwords.
 
-![Snyk login](../../images/snyk_1_login.png)
+![Snyk login](/images/snyk_1_login.png)
 
 
 - Once signed up you will navigate to **your name** (top right), and select **Account Settings**
 
-![Snyk account settings](../../images/snyk_2_account_settings.png)
+![Snyk account settings](/images/snyk_2_account_settings.png)
 
 - Under **API Token**, click **Show** and copy this value, it will be unique for each user.
 
-![Snyk API token](../../images/snyk_3_api_token.png)
+![Snyk API token](/images/snyk_3_api_token.png)
 
 - Clicking **Show** reveals the token to copy.
 
-![Snyk API token show](../../images/snyk_3b_api_token_show.png)
+![Snyk API token show](/images/snyk_3b_api_token_show.png)
 
 ### Save Password to Session Manager
 Run the following command, replacing `abc123`, with **your unique token**. This places the token in the session parameter manager.
@@ -162,7 +162,7 @@ git push -f codecommit master
 
 Now in `CodeBuild`, look at your **build history**. Note it may take a minute or two for the new scan to run.
 
-![Snyk build](../../images/snyk_4_Build.png)
+![Snyk build](/images/snyk_4_Build.png)
 
 Let’s look at why this failed. We see security vulnerabilities were found and we’re told **how** to fix it!
 
@@ -228,7 +228,7 @@ git push -f codecommit master
 
 This time check `Code Builder` and we see it succeeded.
 
-![Snyk build](../../images/snyk_4b_Build.png)
+![Snyk build](/images/snyk_4b_Build.png)
 
 ```
 Tested 37 dependencies for known vulnerabilities, no vulnerable paths found.
@@ -257,4 +257,4 @@ Docker image: 300326902600.dkr.ecr.us-west-2.amazonaws.com/petstore_frontend:lat
 * Click on **View Report** and then the **Dependencies** tab to see what libraries were used. Click **View All Dependencies**
 * Use the **Integrations** tab (optionally) to connect and automate creation of fixes against a **code repository**.
 
-![Snyk UI](../../images/snyk_5_snykUI.png)
+![Snyk UI](/images/snyk_5_snykUI.png)
