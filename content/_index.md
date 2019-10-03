@@ -1,10 +1,10 @@
 ---
-title: "AWS Modernization Workshop Sample"
+title: "DevSecOps with Snyk"
 chapter: true
 weight: 1
 ---
 
-# AWS Modernization Workshop Sample
+# DevSecOps with Snyk
 
 ### Welcome
 
