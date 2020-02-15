@@ -3,10 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://localhost/</loc>
-  </url>
-  
-  <url>
     <loc>http://localhost/50_conclusion/1_after_thoughts.html</loc>
   </url>
   
@@ -16,6 +12,10 @@
   
   <url>
     <loc>http://localhost/20_getting-started/1_getting_started.html</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/</loc>
   </url>
   
   <url>
