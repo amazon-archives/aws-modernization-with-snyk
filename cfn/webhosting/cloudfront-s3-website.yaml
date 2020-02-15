@@ -15,7 +15,7 @@ Parameters:
     ConstraintDescription: must be a valid DNS zone name.
   CertificateArn:
     Type: String
-    Default:  arn:aws:acm:us-east-1:497025854095:certificate/491991ad-c0b4-4793-98a1-dee54cc3a095
+    Default:  arn:aws:acm:us-east-1:497025854095:certificate/3b7e994b-cb29-4ef2-9279-f716c1335b39
     Description: ARN of a certificate in us-east-1 as its needed for a CloudFront Distribution
     AllowedPattern: "arn:aws:acm:.*"
   OriginAccessID:
@@ -52,6 +52,7 @@ Resources:
         Comment: !Join [' ', [!Ref 'WebsiteBucket', "Workshop Distribution"]]
         Aliases:
         - !Join ['', [ !Ref 'WorkshopHostname', '.', !Ref 'DomainName']]
+        - snyk.modernize.awsworkshop.io
         DefaultCacheBehavior:
           AllowedMethods:
           - GET
